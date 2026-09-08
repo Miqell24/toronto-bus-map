@@ -8897,6 +8897,756 @@
       "rank": 1
     },
     {
+      "line": "1",
+      "mode": "tram",
+      "color": "#D5C82B",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "Vaughan Metropolitan Centre Station",
+          "variants": 26,
+          "tripCount": 254,
+          "stops": 38,
+          "lengthKm": 38.55,
+          "stats": {
+            "observations": 1657,
+            "matched": 1648,
+            "noCandidates": 9,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 18.569395419804113,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 230
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "Finch Station",
+          "variants": 36,
+          "tripCount": 233,
+          "stops": 38,
+          "lengthKm": 38.6,
+          "stats": {
+            "observations": 1664,
+            "matched": 1655,
+            "noCandidates": 9,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 18.563778766354545,
+            "roundaboutSegs": 0,
+            "extStart": 163,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "line": "2",
+      "mode": "tram",
+      "color": "#008000",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "Kennedy Station",
+          "variants": 39,
+          "tripCount": 283,
+          "stops": 31,
+          "lengthKm": 26.12,
+          "stats": {
+            "observations": 1220,
+            "matched": 1220,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 9.232227595585865,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "Kipling Station",
+          "variants": 41,
+          "tripCount": 293,
+          "stops": 31,
+          "lengthKm": 26.12,
+          "stats": {
+            "observations": 1220,
+            "matched": 1220,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 9.267773414152385,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "line": "4",
+      "mode": "tram",
+      "color": "#B300B3",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "Don Mills Station",
+          "variants": 4,
+          "tripCount": 870,
+          "stops": 5,
+          "lengthKm": 5.25,
+          "stats": {
+            "observations": 264,
+            "matched": 264,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 7.163120717998823,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "Sheppard-Yonge Station",
+          "variants": 1,
+          "tripCount": 882,
+          "stops": 5,
+          "lengthKm": 5.25,
+          "stats": {
+            "observations": 264,
+            "matched": 264,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 7.135822441929632,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "line": "5",
+      "mode": "tram",
+      "color": "#FF8000",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "Kennedy Station",
+          "variants": 1,
+          "tripCount": 665,
+          "stops": 25,
+          "lengthKm": 18.66,
+          "stats": {
+            "observations": 25,
+            "matched": 25,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 2.7198849253786435,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "Mount Dennis Station",
+          "variants": 1,
+          "tripCount": 665,
+          "stops": 25,
+          "lengthKm": 18.66,
+          "stats": {
+            "observations": 25,
+            "matched": 25,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 2.7407045676175543,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "line": "6",
+      "mode": "tram",
+      "color": "#808080",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "Finch West Station",
+          "variants": 2,
+          "tripCount": 473,
+          "stops": 18,
+          "lengthKm": 10.43,
+          "stats": {
+            "observations": 438,
+            "matched": 438,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 2.7057810932216935,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "Humber College",
+          "variants": 3,
+          "tripCount": 462,
+          "stops": 18,
+          "lengthKm": 10.42,
+          "stats": {
+            "observations": 438,
+            "matched": 438,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 2.646320300169821,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "line": "501",
+      "mode": "tram",
+      "color": "#d6212b",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "Neville Park",
+          "variants": 3,
+          "tripCount": 494,
+          "stops": 61,
+          "lengthKm": 17.25,
+          "stats": {
+            "observations": 866,
+            "matched": 866,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 4.821821087420993,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "Humber",
+          "variants": 3,
+          "tripCount": 475,
+          "stops": 62,
+          "lengthKm": 17,
+          "stats": {
+            "observations": 850,
+            "matched": 850,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 3.2041793369182763,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "line": "503",
+      "mode": "tram",
+      "color": "#d6212b",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "Victoria Park",
+          "variants": 2,
+          "tripCount": 529,
+          "stops": 40,
+          "lengthKm": 10.33,
+          "stats": {
+            "observations": 508,
+            "matched": 500,
+            "noCandidates": 8,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 3.2329295231891555,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "York via King",
+          "variants": 1,
+          "tripCount": 527,
+          "stops": 38,
+          "lengthKm": 9.19,
+          "stats": {
+            "observations": 462,
+            "matched": 462,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 2.3653266952883576,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "line": "504",
+      "mode": "tram",
+      "color": "#d6212b",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "Distillery",
+          "variants": 8,
+          "tripCount": 468,
+          "stops": 38,
+          "lengthKm": 10.34,
+          "stats": {
+            "observations": 522,
+            "matched": 522,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 2.422343078919275,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "Dundas West Station",
+          "variants": 11,
+          "tripCount": 485,
+          "stops": 39,
+          "lengthKm": 10.24,
+          "stats": {
+            "observations": 515,
+            "matched": 515,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 1.6733508359919742,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "line": "505",
+      "mode": "tram",
+      "color": "#d6212b",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "Broadview Station",
+          "variants": 6,
+          "tripCount": 607,
+          "stops": 39,
+          "lengthKm": 10.85,
+          "stats": {
+            "observations": 545,
+            "matched": 545,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 2.916886403656047,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "Dundas West Station",
+          "variants": 6,
+          "tripCount": 556,
+          "stops": 42,
+          "lengthKm": 10.84,
+          "stats": {
+            "observations": 543,
+            "matched": 543,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 3.194022367401335,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "line": "506",
+      "mode": "tram",
+      "color": "#d6212b",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "Main Street Station",
+          "variants": 5,
+          "tripCount": 457,
+          "stops": 63,
+          "lengthKm": 15.71,
+          "stats": {
+            "observations": 791,
+            "matched": 791,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 2.7233987032424674,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "High Park",
+          "variants": 5,
+          "tripCount": 438,
+          "stops": 63,
+          "lengthKm": 15.47,
+          "stats": {
+            "observations": 774,
+            "matched": 774,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 1.8051318325605474,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "line": "507",
+      "mode": "tram",
+      "color": "#d6212b",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "Humber",
+          "variants": 5,
+          "tripCount": 535,
+          "stops": 30,
+          "lengthKm": 7.97,
+          "stats": {
+            "observations": 444,
+            "matched": 355,
+            "noCandidates": 89,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 3.9406752767361355,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "Long Branch",
+          "variants": 3,
+          "tripCount": 549,
+          "stops": 30,
+          "lengthKm": 8.02,
+          "stats": {
+            "observations": 446,
+            "matched": 355,
+            "noCandidates": 91,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 4.155856134711479,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "line": "509",
+      "mode": "tram",
+      "color": "#d6212b",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "Union Station",
+          "variants": 2,
+          "tripCount": 554,
+          "stops": 12,
+          "lengthKm": 3.82,
+          "stats": {
+            "observations": 196,
+            "matched": 196,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 2.6533593794689914,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "Exhibition",
+          "variants": 2,
+          "tripCount": 554,
+          "stops": 13,
+          "lengthKm": 4.45,
+          "stats": {
+            "observations": 224,
+            "matched": 224,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 2.9351586906001748,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "line": "510",
+      "mode": "tram",
+      "color": "#d6212b",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "Union Station",
+          "variants": 4,
+          "tripCount": 534,
+          "stops": 17,
+          "lengthKm": 5.32,
+          "stats": {
+            "observations": 272,
+            "matched": 272,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 2.4613074345630923,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "Spadina Station",
+          "variants": 3,
+          "tripCount": 532,
+          "stops": 18,
+          "lengthKm": 5.55,
+          "stats": {
+            "observations": 273,
+            "matched": 273,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 2.8416434524901435,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "line": "511",
+      "mode": "tram",
+      "color": "#d6212b",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "Exhibition",
+          "variants": 4,
+          "tripCount": 635,
+          "stops": 18,
+          "lengthKm": 5.43,
+          "stats": {
+            "observations": 273,
+            "matched": 273,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 2.4003202263682177,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "Bathurst Station",
+          "variants": 4,
+          "tripCount": 639,
+          "stops": 17,
+          "lengthKm": 4.78,
+          "stats": {
+            "observations": 241,
+            "matched": 241,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 2.442305544026091,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "line": "512",
+      "mode": "tram",
+      "color": "#d6212b",
+      "dirs": [
+        {
+          "dir": "0",
+          "headsign": "St Clair Station",
+          "variants": 3,
+          "tripCount": 649,
+          "stops": 27,
+          "lengthKm": 6.95,
+          "stats": {
+            "observations": 350,
+            "matched": 350,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 1.9408198518432183,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        },
+        {
+          "dir": "1",
+          "headsign": "Keele",
+          "variants": 5,
+          "tripCount": 647,
+          "stops": 27,
+          "lengthKm": 7.16,
+          "stats": {
+            "observations": 362,
+            "matched": 362,
+            "noCandidates": 0,
+            "viterbiBreaks": 0,
+            "bridged": 0,
+            "rawStretchCount": 0,
+            "rawMeters": 0,
+            "meanError": 1.710075189992597,
+            "roundaboutSegs": 0,
+            "extStart": 0,
+            "extEnd": 0
+          }
+        }
+      ],
+      "rank": 1
+    },
+    {
       "line": "300",
       "mode": "bus",
       "color": "#000000",
@@ -10245,756 +10995,6 @@
         }
       ],
       "rank": 2
-    },
-    {
-      "line": "1",
-      "mode": "tram",
-      "color": "#D5C82B",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "Vaughan Metropolitan Centre Station",
-          "variants": 26,
-          "tripCount": 254,
-          "stops": 38,
-          "lengthKm": 38.55,
-          "stats": {
-            "observations": 1657,
-            "matched": 1648,
-            "noCandidates": 9,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 18.569395419804113,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 230
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "Finch Station",
-          "variants": 36,
-          "tripCount": 233,
-          "stops": 38,
-          "lengthKm": 38.6,
-          "stats": {
-            "observations": 1664,
-            "matched": 1655,
-            "noCandidates": 9,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 18.563778766354545,
-            "roundaboutSegs": 0,
-            "extStart": 163,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "line": "2",
-      "mode": "tram",
-      "color": "#008000",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "Kennedy Station",
-          "variants": 39,
-          "tripCount": 283,
-          "stops": 31,
-          "lengthKm": 26.12,
-          "stats": {
-            "observations": 1220,
-            "matched": 1220,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 9.232227595585865,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "Kipling Station",
-          "variants": 41,
-          "tripCount": 293,
-          "stops": 31,
-          "lengthKm": 26.12,
-          "stats": {
-            "observations": 1220,
-            "matched": 1220,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 9.267773414152385,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "line": "4",
-      "mode": "tram",
-      "color": "#B300B3",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "Don Mills Station",
-          "variants": 4,
-          "tripCount": 870,
-          "stops": 5,
-          "lengthKm": 5.25,
-          "stats": {
-            "observations": 264,
-            "matched": 264,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 7.163120717998823,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "Sheppard-Yonge Station",
-          "variants": 1,
-          "tripCount": 882,
-          "stops": 5,
-          "lengthKm": 5.25,
-          "stats": {
-            "observations": 264,
-            "matched": 264,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 7.135822441929632,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "line": "5",
-      "mode": "tram",
-      "color": "#FF8000",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "Kennedy Station",
-          "variants": 1,
-          "tripCount": 665,
-          "stops": 25,
-          "lengthKm": 18.66,
-          "stats": {
-            "observations": 25,
-            "matched": 25,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 2.7198849253786435,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "Mount Dennis Station",
-          "variants": 1,
-          "tripCount": 665,
-          "stops": 25,
-          "lengthKm": 18.66,
-          "stats": {
-            "observations": 25,
-            "matched": 25,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 2.7407045676175543,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "line": "6",
-      "mode": "tram",
-      "color": "#808080",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "Finch West Station",
-          "variants": 2,
-          "tripCount": 473,
-          "stops": 18,
-          "lengthKm": 10.43,
-          "stats": {
-            "observations": 438,
-            "matched": 438,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 2.7057810932216935,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "Humber College",
-          "variants": 3,
-          "tripCount": 462,
-          "stops": 18,
-          "lengthKm": 10.42,
-          "stats": {
-            "observations": 438,
-            "matched": 438,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 2.646320300169821,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "line": "501",
-      "mode": "tram",
-      "color": "#d6212b",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "Neville Park",
-          "variants": 3,
-          "tripCount": 494,
-          "stops": 61,
-          "lengthKm": 17.25,
-          "stats": {
-            "observations": 866,
-            "matched": 866,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 4.821821087420993,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "Humber",
-          "variants": 3,
-          "tripCount": 475,
-          "stops": 62,
-          "lengthKm": 17,
-          "stats": {
-            "observations": 850,
-            "matched": 850,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 3.2041793369182763,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "line": "503",
-      "mode": "tram",
-      "color": "#d6212b",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "Victoria Park",
-          "variants": 2,
-          "tripCount": 529,
-          "stops": 40,
-          "lengthKm": 10.33,
-          "stats": {
-            "observations": 508,
-            "matched": 500,
-            "noCandidates": 8,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 3.2329295231891555,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "York via King",
-          "variants": 1,
-          "tripCount": 527,
-          "stops": 38,
-          "lengthKm": 9.19,
-          "stats": {
-            "observations": 462,
-            "matched": 462,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 2.3653266952883576,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "line": "504",
-      "mode": "tram",
-      "color": "#d6212b",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "Distillery",
-          "variants": 8,
-          "tripCount": 468,
-          "stops": 38,
-          "lengthKm": 10.34,
-          "stats": {
-            "observations": 522,
-            "matched": 522,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 2.422343078919275,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "Dundas West Station",
-          "variants": 11,
-          "tripCount": 485,
-          "stops": 39,
-          "lengthKm": 10.24,
-          "stats": {
-            "observations": 515,
-            "matched": 515,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 1.6733508359919742,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "line": "505",
-      "mode": "tram",
-      "color": "#d6212b",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "Broadview Station",
-          "variants": 6,
-          "tripCount": 607,
-          "stops": 39,
-          "lengthKm": 10.85,
-          "stats": {
-            "observations": 545,
-            "matched": 545,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 2.916886403656047,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "Dundas West Station",
-          "variants": 6,
-          "tripCount": 556,
-          "stops": 42,
-          "lengthKm": 10.84,
-          "stats": {
-            "observations": 543,
-            "matched": 543,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 3.194022367401335,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "line": "506",
-      "mode": "tram",
-      "color": "#d6212b",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "Main Street Station",
-          "variants": 5,
-          "tripCount": 457,
-          "stops": 63,
-          "lengthKm": 15.71,
-          "stats": {
-            "observations": 791,
-            "matched": 791,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 2.7233987032424674,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "High Park",
-          "variants": 5,
-          "tripCount": 438,
-          "stops": 63,
-          "lengthKm": 15.47,
-          "stats": {
-            "observations": 774,
-            "matched": 774,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 1.8051318325605474,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "line": "507",
-      "mode": "tram",
-      "color": "#d6212b",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "Humber",
-          "variants": 5,
-          "tripCount": 535,
-          "stops": 30,
-          "lengthKm": 7.97,
-          "stats": {
-            "observations": 444,
-            "matched": 355,
-            "noCandidates": 89,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 3.9406752767361355,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "Long Branch",
-          "variants": 3,
-          "tripCount": 549,
-          "stops": 30,
-          "lengthKm": 8.02,
-          "stats": {
-            "observations": 446,
-            "matched": 355,
-            "noCandidates": 91,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 4.155856134711479,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "line": "509",
-      "mode": "tram",
-      "color": "#d6212b",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "Union Station",
-          "variants": 2,
-          "tripCount": 554,
-          "stops": 12,
-          "lengthKm": 3.82,
-          "stats": {
-            "observations": 196,
-            "matched": 196,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 2.6533593794689914,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "Exhibition",
-          "variants": 2,
-          "tripCount": 554,
-          "stops": 13,
-          "lengthKm": 4.45,
-          "stats": {
-            "observations": 224,
-            "matched": 224,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 2.9351586906001748,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "line": "510",
-      "mode": "tram",
-      "color": "#d6212b",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "Union Station",
-          "variants": 4,
-          "tripCount": 534,
-          "stops": 17,
-          "lengthKm": 5.32,
-          "stats": {
-            "observations": 272,
-            "matched": 272,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 2.4613074345630923,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "Spadina Station",
-          "variants": 3,
-          "tripCount": 532,
-          "stops": 18,
-          "lengthKm": 5.55,
-          "stats": {
-            "observations": 273,
-            "matched": 273,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 2.8416434524901435,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "line": "511",
-      "mode": "tram",
-      "color": "#d6212b",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "Exhibition",
-          "variants": 4,
-          "tripCount": 635,
-          "stops": 18,
-          "lengthKm": 5.43,
-          "stats": {
-            "observations": 273,
-            "matched": 273,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 2.4003202263682177,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "Bathurst Station",
-          "variants": 4,
-          "tripCount": 639,
-          "stops": 17,
-          "lengthKm": 4.78,
-          "stats": {
-            "observations": 241,
-            "matched": 241,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 2.442305544026091,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
-    },
-    {
-      "line": "512",
-      "mode": "tram",
-      "color": "#d6212b",
-      "dirs": [
-        {
-          "dir": "0",
-          "headsign": "St Clair Station",
-          "variants": 3,
-          "tripCount": 649,
-          "stops": 27,
-          "lengthKm": 6.95,
-          "stats": {
-            "observations": 350,
-            "matched": 350,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 1.9408198518432183,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        },
-        {
-          "dir": "1",
-          "headsign": "Keele",
-          "variants": 5,
-          "tripCount": 647,
-          "stops": 27,
-          "lengthKm": 7.16,
-          "stats": {
-            "observations": 362,
-            "matched": 362,
-            "noCandidates": 0,
-            "viterbiBreaks": 0,
-            "bridged": 0,
-            "rawStretchCount": 0,
-            "rawMeters": 0,
-            "meanError": 1.710075189992597,
-            "roundaboutSegs": 0,
-            "extStart": 0,
-            "extEnd": 0
-          }
-        }
-      ],
-      "rank": 1
     },
     {
       "line": "301",
