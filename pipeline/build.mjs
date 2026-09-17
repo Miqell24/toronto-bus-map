@@ -1,17 +1,24 @@
 // GTFS → OSM graph → map matching (HMM) → GeoJSON files for the frontend.
-// Toronto: ONE feed — the TTC's own "Merged GTFS" on the City of Toronto open
-// data portal (open.toronto.ca/dataset/merged-gtfs-ttc-routes-and-schedules,
+// Toronto: the TTC's own "Merged GTFS" on the City of Toronto open data
+// portal (open.toronto.ca/dataset/merged-gtfs-ttc-routes-and-schedules,
 // refreshed with every board period), every mode of the TTC in it: 204 bus
 // routes (route_type 3), the ten streetcar routes 501–512 and their six Blue
 // Night siblings 301–312 (0), the three subway lines 1, 2 and 4 (1), and the
 // two light rail lines 5 Eglinton and 6 Finch West, which the feed codes as
 // streetcars (0) but the TTC numbers, colours and signs as rapid transit.
-// Three cfgs: buses navy — the 9xx expresses and the 3xx Blue Night the feed
-// paints green and blue included, because colour means the MODE here —
-// streetcars family red, and the five numbered rapid transit lines in the
-// TTC's own colours with the trunk treatment (wide ribbon, station discs,
-// always-on names).
-// Usage: node pipeline/build.mjs [--all | lines...] [--tram all|501,1,5]
+// Since 17.09.2026 the region north of Steeles rides along (user: "the map
+// was cut off artificially"): York Region Transit whole — Vaughan, Richmond
+// Hill, Markham, Aurora, Newmarket, Georgina, the Viva rapidways — the GO
+// buses that stay inside the frame (pipeline/scope.mjs), and the GO trains
+// with UP Express drawn to their real ends, Kitchener, Niagara Falls, Barrie
+// and Oshawa, on a rail file cut wider than the road grid.
+// Four cfgs: buses navy — the 9xx expresses and the 3xx Blue Night the feed
+// paints green and blue included, because colour means the MODE here, and
+// the Viva colours likewise — streetcars family red, the five numbered
+// rapid transit lines in the TTC's own colours with the trunk treatment
+// (wide ribbon, station discs, always-on names), and the GO / UP lines in
+// Metrolinx's colours with the same treatment.
+// Usage: node pipeline/build.mjs [--all | lines...] [--tram all|501,1,5,Barrie]
 // Results land in shared files with properties.color/mode, so the frontend styles
 // them data-driven.
 import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from 'node:fs';
@@ -62,13 +69,18 @@ const keyParts = (s) => {
 // the number rows along the streets, the terminus badge grids. The night
 // rule is this city's own (NIGHT, tested on the printed number); the
 // trolleybuses are whatever the feed loop painted green (TROLLEYS).
+// NIGHT is tested on the KEY: the TTC's keys are its bare numbers, so 300–399
+// is the Blue Night network, while York Region's 300–391 (keys Y300…) are its
+// expresses and stay day lines.
 const NIGHT = /^3\d\d$/;
 const TROLLEYS = new Set();
-const lineRank = (k) => (TROLLEYS.has(k) ? 0
-  : NIGHT.test(typeof LBL !== 'undefined' && LBL.has(k) ? LBL.get(k) : k) ? 2 : 1);
+const lineRank = (k) => (TROLLEYS.has(k) ? 0 : NIGHT.test(k) ? 2 : 1);
+// operator order inside a rank (17.09.2026): the TTC's bare numbers, then
+// York Region (Viva first, then 1–522), then the GO buses
+const opRank = (k) => (/^GO\d/.test(k) ? 2 : /^(Y\d|Viva )/.test(k) ? 1 : 0);
 const numSort = (a, b) => {
   const A = keyParts(a), B = keyParts(b);
-  return lineRank(a) - lineRank(b) || A[0].localeCompare(B[0]) || (A[1] - B[1]) || A[2].localeCompare(B[2]);
+  return lineRank(a) - lineRank(b) || opRank(a) - opRank(b) || A[0].localeCompare(B[0]) || (A[1] - B[1]) || A[2].localeCompare(B[2]);
 };
 function round6(v) { return Math.round(v * 1e6) / 1e6; }
 // dark variant for feed-supplied line colors (badge rims / terminus fills)
@@ -130,20 +142,90 @@ if (ti >= 0) {
 const busAll = busArgs.includes('--all');
 const busList = busArgs.filter((a) => a !== '--all');
 
-// ONE feed, THREE cfgs.
+// FOUR feeds, FOUR cfgs.
 //
-// The TTC is the whole map: the City of Toronto plus the few routes that
-// cross into Mississauga, Vaughan and Markham — 44 × 50 km, no scope rule
-// needed. Route types: 3 bus, 0 streetcar (AND the two light rail lines), 1
-// subway. No shapes on line 5 Eglinton — its trips ship no shape_id, so the
-// station sequence is the matching observation (pseudo-matching, as Olsztyn
-// and Istanbul's buses do).
+// The TTC feed: route types 3 bus, 0 streetcar (AND the two light rail
+// lines), 1 subway. No shapes on line 5 Eglinton — its trips ship no
+// shape_id, so the station sequence is the matching observation
+// (pseudo-matching, as Olsztyn and Istanbul's buses do). York Region Transit
+// (17.09.2026): 125 bus routes, all of them, type 3 — the frame reaches
+// Georgina for them. GO Transit: the buses of the allowlist
+// (pipeline/scope.mjs → data/scope.json, every stop inside the frame) and the
+// seven train lines, type 2, drawn whole. UP Express: one line, type 2.
 //
 // LINE KEYS: the TTC's numbers are unique across every mode — rapid transit
 // 1–6, buses 7–189 and 300–399 (Blue Night) and 900–996 (express), streetcars
-// 501–512 with their night siblings 301–312 — so every key is the number the
-// street signs show, nothing invented and nothing prefixed.
+// 501–512 with their night siblings 301–312 — so every TTC key is the number
+// the street signs show, nothing invented and nothing prefixed. York Region
+// and GO reuse those numbers (a YRT 12, a GO 19 against the TTC's), so their
+// keys carry "Y" and "GO" and print the bare number (LBL); the Viva lines
+// print as the region brands them, "Viva Blue"; the GO trains by line name,
+// the airport train as "UP".
 const LBL = new Map();
+const yrtKey = (sn) => {
+  const s = (sn || '').trim();
+  if (!s) return null;
+  let m = /^0*(\d+)\|0*(\d+)$/.exec(s);         // "098|099" — the Yonge late-night pairing
+  if (m) { LBL.set(`Y${m[1]}/${m[2]}`, `${m[1]}/${m[2]}`); return `Y${m[1]}/${m[2]}`; }
+  m = /^0*(\d+)([A-Z]?)$/.exec(s);                 // "001", "083A"
+  if (m) { LBL.set('Y' + m[1] + m[2], m[1] + m[2]); return 'Y' + m[1] + m[2]; }
+  return 'Viva ' + s.replace(/\b\w/g, (c) => c.toUpperCase());   // "blue B" → Viva Blue B
+};
+const goBusKey = (sn) => { const s = (sn || '').trim(); if (!s) return null; LBL.set('GO' + s, s); return 'GO' + s; };
+const goRailKey = (sn, r) => (r.route_long_name || '').trim() || null;
+
+// the ALLOWLIST that is the GO bus scope — build refuses to guess
+const SCOPE_FILE = join(ROOT, 'data/scope.json');
+if (!existsSync(SCOPE_FILE)) {
+  console.error('data/scope.json missing — run `node pipeline/scope.mjs` (npm run download does it)');
+  process.exit(1);
+}
+const S_GO = new Set(JSON.parse(readFileSync(SCOPE_FILE, 'utf8')).go);
+
+// Names as the signs show them. York Region SHOUTS its poles ("HWY 7 /
+// MARTIN GROVE", "MAJOR MACKENZIE DR / BATHURST ST"); usName brings a fully
+// uppercase name to title case, keeps the abbreviations the flags use (Av,
+// Rd, Blvd, Cres…) and the acronyms that are names (GO, YRT, TTC), and leaves
+// a mixed-case name alone — the TTC's and GO's names are already cased. The
+// YRT headsigns end in a compass tag ("Newmarket Terminal - NB"), the GO
+// headsigns start with the route ("19 - Square One", "LW - Union Station GO")
+// and the GO station names end in " GO" — all of that goes.
+const KEEP = new Set(['GO', 'YRT', 'TTC', 'UP', 'VIVA', 'HWY', 'LRT', 'YMCA', 'RCMP', 'CN', 'CP', 'II', 'III', 'IV', 'NE', 'NW', 'SE', 'SW', 'N', 'S', 'E', 'W', 'PS', 'SS', 'HS', 'CI', 'SDRD']);
+const ABBR = {
+  AV: 'Av', AVE: 'Ave', ST: 'St', RD: 'Rd', BLVD: 'Blvd', PL: 'Pl', PKWY: 'Pkwy', DR: 'Dr', LN: 'Ln', TER: 'Ter',
+  SQ: 'Sq', CRT: 'Crt', CT: 'Ct', CRES: 'Cres', CIR: 'Cir', CTR: 'Ctr', CTRE: 'Ctre', HTS: 'Hts', JCT: 'Jct',
+  MT: 'Mt', PT: 'Pt', BLDG: 'Bldg', GDNS: 'Gdns', TRL: 'Trl', RDG: 'Rdg', WY: 'Wy', GT: 'Gt', HWY: 'Hwy', SDRD: 'Sdrd',
+};
+const SMALL = new Set(['OF', 'AT', 'THE', 'AND', 'TO', 'ON', 'BY', 'IN', 'FOR', 'DE', 'LA']);
+const usWord = (w, first) => {
+  const core = w.replace(/[^A-Z0-9']/g, '');
+  if (!core) return w;
+  const put = (v) => w.replace(core, v);
+  if (KEEP.has(core)) return w;
+  if (ABBR[core]) return put(ABBR[core]);
+  if (/^\d+(ST|ND|RD|TH)$/.test(core)) return put(core.toLowerCase());
+  if (/^\d/.test(core)) return w;
+  if (SMALL.has(core) && !first) return put(core === 'LA' ? 'La' : core.toLowerCase());
+  if (/^MC[A-Z]{2,}$/.test(core)) return put('Mc' + core[2] + core.slice(3).toLowerCase());
+  if (/^O'[A-Z]{2,}$/.test(core)) return put("O'" + core[2] + core.slice(3).toLowerCase());
+  return put(core[0] + core.slice(1).toLowerCase());
+};
+const shouts = (n) => n === n.toUpperCase();
+const usName = (n) => {
+  n = n.replace(/\s+/g, ' ').trim();
+  if (!shouts(n)) return n;
+  const parts = n.split(/(\s+|\/|-|\(|\))/);
+  let first = true;
+  return parts.map((p) => {
+    if (/^(\s+|\/|-|\(|\))$/.test(p) || !p) { if (p === '/' || p === '-' || p === '(') first = true; return p; }
+    const out = usWord(p, first);
+    first = false;
+    return out;
+  }).join('');
+};
+const yrtName = (n) => usName(n.replace(/\s+-\s+[NSEW]B$/i, ''));
+const goName = (n) => n.replace(/\s+/g, ' ').trim().replace(/^[A-Z0-9]{1,4} - /, '').replace(/ GO( Bus)?$/, '').replace(/ GO\/UP$/, '');
+const upName = (n) => n.replace(/\s+/g, ' ').trim().replace(/^UP Express /, '').replace(/ GO\/UP$/, '');
 
 // The rapid transit colours come from the feed itself — the TTC fills
 // route_color on every route, and on lines 1–6 they are the line colours of
@@ -159,11 +241,28 @@ for (const r of ALL_ROUTES) {
   if (!RAPID.has(k)) continue;
   if (/^[0-9A-F]{6}$/i.test(r.route_color || '')) TOR_COLORS[k] = '#' + r.route_color.toUpperCase();
 }
+// The GO trains and UP Express carry Metrolinx's line colours the same way
+// (Lakeshore West maroon, Barrie navy, Kitchener green, UP blue…) and get the
+// trunk treatment as the subway does.
+const GO_RAIL = new Set();
+for (const r of await readCsv(join(ROOT, 'data/gtfs-go/routes.txt'))) {
+  if ((r.route_type || '').trim() !== '2') continue;
+  const k = goRailKey(r.route_short_name, r);
+  if (!k) continue;
+  GO_RAIL.add(k);
+  if (/^[0-9A-F]{6}$/i.test(r.route_color || '')) TOR_COLORS[k] = '#' + r.route_color.toUpperCase();
+}
+for (const r of await readCsv(join(ROOT, 'data/gtfs-up/routes.txt'))) {
+  if ((r.route_type || '').trim() !== '2') continue;
+  GO_RAIL.add('UP');
+  if (/^[0-9A-F]{6}$/i.test(r.route_color || '')) TOR_COLORS.UP = '#' + r.route_color.toUpperCase();
+}
 const isRailTrunk = (l) => l in TOR_COLORS;
 
-// --tram feeds two rail cfgs here, told apart by the number itself: 1–6 is
-// rapid transit, 301–512 a streetcar
-const rapidSel = tramLines.filter((l) => isRailTrunk(l));
+// --tram feeds three rail cfgs here, told apart by the key itself: 1–6 is
+// rapid transit, a GO line name or UP the railway, 301–512 a streetcar
+const rapidSel = tramLines.filter((l) => RAPID.has(l));
+const railSel = tramLines.filter((l) => GO_RAIL.has(l));
 const tramSel = tramLines.filter((l) => l !== 'all' && !isRailTrunk(l));
 
 // Names as the TTC signs them. Street poles need nothing; the subway and
@@ -180,14 +279,23 @@ const fixName = (n) => n.replace(/\s+/g, ' ').trim()
 
 const MODES = [{
   mode: 'bus', label: 'buses', graphMode: 'road',
-  // the city and its rim — 5 × 5 tiles cut out of the Geofabrik extract (see
-  // pipeline/pbf-tiles.py); merged at load, ways deduped by id
-  osmFiles: Array.from({ length: 25 }, (_, i) => `data/osm/tiles/t${i + 1}.json`),
+  // the city, York Region up to Georgina and Barrie, Brampton and Bolton —
+  // 6 × 9 tiles cut out of the Geofabrik extract (see pipeline/pbf-tiles.py);
+  // merged at load, ways deduped by id
+  osmFiles: Array.from({ length: 54 }, (_, i) => `data/osm/tiles/t${i + 1}.json`),
   color: '#0059a9', colorDark: '#00294f',
   all: busAll, lines: busList.length ? busList : (busAll ? [] : ['10']),
   feeds: [
     { tag: 'ttc', dir: 'data/gtfs', routeTypes: ['3'],
       mapKey: (sn) => sn || null, nameFix: fixName },
+    // York Region Transit whole (17.09.2026) — the Viva lines are buses on
+    // rapidways, navy like the rest: colour means the mode here
+    { tag: 'yrt', dir: 'data/gtfs-yrt', routeTypes: ['3'],
+      mapKey: yrtKey, nameFix: yrtName },
+    // the GO buses whose every stop lies inside the frame (data/scope.json)
+    { tag: 'go', dir: 'data/gtfs-go', routeTypes: ['3'],
+      skipRoute: (r) => !S_GO.has(r.route_id),
+      mapKey: goBusKey, nameFix: goName },
   ],
 }];
 const tramAll = tramLines.length === 1 && tramLines[0] === 'all';
@@ -229,6 +337,25 @@ if (tramAll || rapidSel.length) MODES.push({
     { tag: 'ttc', dir: 'data/gtfs', routeTypes: ['1', '0'],
       skipRoute: (r) => !RAPID.has((r.route_short_name || '').trim()),
       mapKey: (sn) => sn || null, lineColor: (k) => TOR_COLORS[k], nameFix: fixName },
+  ],
+});
+if (tramAll || railSel.length) MODES.push({
+  // the GO trains and UP Express on railway=rail (17.09.2026); allMetro gives
+  // every line the trunk treatment. allVariants on the GO lines: Lakeshore
+  // West runs to Aldershot, West Harbour and Niagara Falls, Kitchener to
+  // Bramalea, Mount Pleasant and Kitchener — the longest-regular-pattern rule
+  // would stop at the busiest turn-back, the maximal-pattern rule draws the
+  // line to its end and folds the short workings into it.
+  mode: 'tram', label: 'GO Transit & UP Express', osmFile: 'data/osm/toronto-rail.json',
+  graphMode: 'tram', railKeep: new Set(['rail']),
+  allMetro: true,
+  color: '#d6212b', colorDark: '#7c1116',
+  all: tramAll, lines: tramAll ? [] : railSel,
+  feeds: [
+    { tag: 'gor', dir: 'data/gtfs-go', routeTypes: ['2'], allVariants: true, foldSubsets: true,
+      mapKey: goRailKey, lineColor: (k) => TOR_COLORS[k], nameFix: goName },
+    { tag: 'up', dir: 'data/gtfs-up', routeTypes: ['2'],
+      mapKey: () => 'UP', lineColor: (k) => TOR_COLORS[k], nameFix: upName },
   ],
 });
 
@@ -517,10 +644,21 @@ async function processMode(cfg) {
       // longer one (turn-backs, short workings) are not drawn separately —
       // they are the same track; different tails survive because neither
       // contains the other, which is exactly Epping vs Hainault.
+      // Patterns are pooled per line AND direction across every shape_id the
+      // feed publishes (the New York rule, 17.09.2026): GO gives every working
+      // its own shape, and pooling per shape compared nothing with anything.
       const exploded = [];
+      const pooled = new Map(); // line|dir → { r, trips: Set }
+      const tripRep = new Map(); // trip → the rep (and so the shape) it came from
       for (const r of feedReps) {
+        const k = r.line + '|' + r.dir;
+        let p = pooled.get(k);
+        if (!p) pooled.set(k, (p = { r, trips: new Set() }));
+        for (const id of r.candTrips) { p.trips.add(id); tripRep.set(id, r); }
+      }
+      for (const { r, trips } of pooled.values()) {
         const pat = new Map();
-        for (const id of r.candTrips) {
+        for (const id of trips) {
           const seq = tripStops.get(id);
           if (!seq || seq.length < 2) continue;
           seq.sort((a, b) => a.seq - b.seq);
@@ -536,9 +674,29 @@ async function processMode(cfg) {
           if (kept.some((k) => k.fp.includes(fp))) continue;
           kept.push({ fp, ...e });
         }
+        // foldSubsets (the GO trains, 17.09.2026): an express working that
+        // skips stations is not a substring of the all-stops pattern, yet it
+        // is the same track to the same end. Largest pattern first, a working
+        // folds into a kept one when both its ends lie on it and it serves at
+        // most one station the kept one skips (Exhibition, Mimico — the
+        // reason plain set inclusion left eleven Lakeshore West workings).
+        // What survives are the real ends: Confederation, Niagara Falls and
+        // Hamilton GO Centre, Kitchener and Stratford, Allandale Waterfront.
+        if (feed.foldSubsets && kept.length > 1) {
+          const bySize = kept.map((k) => { const ids = k.fp.split('>'); return { k, s: new Set(ids), first: ids[0], last: ids[ids.length - 1] }; })
+            .sort((a, b) => b.s.size - a.s.size || b.k.count - a.k.count);
+          const real = [];
+          for (const c of bySize) {
+            const covered = real.some((o) => o.s.has(c.first) && o.s.has(c.last) && [...c.s].filter((x) => !o.s.has(x)).length <= 1);
+            if (!covered) real.push(c);
+          }
+          kept.length = 0; kept.push(...real.map((x) => x.k));
+        }
         kept.sort((a, b) => b.count - a.count);
         for (const e of kept) {
-          exploded.push({ ...r, candTrips: new Set(e.trips), stopSeq: e.seq,
+          // the pattern keeps the shape of the trips it came from
+          const base = tripRep.get(e.trips[0]) || r;
+          exploded.push({ ...base, candTrips: new Set(e.trips), stopSeq: e.seq,
             tripCount: e.count, variants: kept.length });
         }
       }
@@ -1912,7 +2070,9 @@ log(`Wrote data/out/{route,streets,labels,street-names,stops,badges,gtfs-shape}.
 
 // Night lines print black, and sort last where the lists carry no rank
 // (user rule 8.09.2026): a post-pass over the written outputs, see night.mjs.
-await (await import('./night.mjs')).nightPass(outDir, /^3\d\d$/, { sort: true });
+// the KEYS decide (nightKeys): York Region's 300s print the same bare
+// numbers as the Blue Night 300s and stay navy day lines
+await (await import('./night.mjs')).nightPass(outDir, NIGHT, { sort: true, nightKeys: new Set(metaLines.map((l) => l.line).filter((k) => lineRank(k) === 2)) });
 // Stop names, headsigns and the few line keys the street prints otherwise
 // (audit, 11.09.2026): a post-pass over the written outputs, see names.mjs.
 (await import('./names.mjs')).namesPass(outDir, undefined, { log });

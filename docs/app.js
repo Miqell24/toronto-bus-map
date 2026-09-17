@@ -183,7 +183,7 @@ async function init() {
   map.addControl(new maplibregl.NavigationControl({ visualizePitch: false }), 'top-right');
   map.addControl(new maplibregl.GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: true, showUserHeading: true, fitBoundsOptions: { maxZoom: 15.5 } }), 'top-right');
   map.addControl(new maplibregl.ScaleControl({ maxWidth: 120 }), 'bottom-left');
-  map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: 'Timetables: TTC (Merged GTFS, City of Toronto Open Data)' }));
+  map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: 'Timetables: TTC (Merged GTFS, City of Toronto Open Data) · York Region Transit · GO Transit & UP Express (Metrolinx)' }));
 
   const [meta, linesMeta] = await Promise.all([
     fetch('data/meta.json').then((r) => r.json()),
@@ -213,7 +213,7 @@ async function init() {
   const nTro = meta.lines.filter((l) => l.mode === 'bus' && l.color === '#149a3f').length;
   const nMB = meta.lines.filter((l) => l.mode === 'bus' && l.color === '#e8a000').length;
   document.getElementById('count').textContent =
-    `(${nBus} bus · ${nTram} streetcar & rapid transit)`;
+    `(${nBus} bus · ${nTram} streetcar, rapid transit & GO)`;
   document.getElementById('stamp').textContent = new Date(meta.generatedAt).toLocaleDateString('en-GB');
   // The pipeline key keeps a disambiguating prefix — route merging, colour
   // lookup and selection all match on it — while everything the panel and the

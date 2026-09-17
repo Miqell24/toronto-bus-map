@@ -126,10 +126,11 @@
     <li class="lines-only"><span class="sw bundle"><i></i><i></i><i></i><i></i></span> Up to 4 lines: each on its own, in its own colour</li>
     <li class="lines-only"><span class="sw trunk"></span> 5 or more: one grey stroke, its numbers beside it</li>
     <li><label><input type="checkbox" id="toggle-bus" checked> <span class="sw line corridor-only"></span> Bus routes</label></li>
-    <li class="sublegend corridor-only">Every TTC bus route with the number the pole shows: 7&ndash;189 the local routes, 300&ndash;399 the Blue Night network, 900&ndash;996 the expresses &mdash; all in the family&rsquo;s navy; the feed&rsquo;s green and blue for express and night are not repeated here.</li>
-    <li><label><input type="checkbox" id="toggle-tram" checked> <span class="sw line corridor-only metro"></span> Streetcars &amp; rapid transit</label></li>
+    <li class="sublegend corridor-only">Every TTC bus route with the number the pole shows: 7&ndash;189 the local routes, 300&ndash;399 the Blue Night network, 900&ndash;996 the expresses; York Region Transit whole &mdash; the Viva rapidways and routes 1&ndash;522, out to Newmarket and Georgina; and the GO buses that stay inside the frame &mdash; all in the family&rsquo;s navy; the feeds&rsquo; colours for express, night and Viva are not repeated here.</li>
+    <li><label><input type="checkbox" id="toggle-tram" checked> <span class="sw line corridor-only metro"></span> Streetcars, rapid transit &amp; GO</label></li>
         <li class="sublegend corridor-only"><span class="mini tram"></span>Streetcars in the family&rsquo;s red: the ten routes 501&ndash;512 and the six Blue Night streetcars 301&ndash;312.</li>
     <li class="sublegend corridor-only">Rapid transit in the TTC&rsquo;s own line colours, as the feed ships them: <span class="mini" style="background:#D5C82B"></span>1 Yonge&ndash;University <span class="mini" style="background:#008000"></span>2 Bloor&ndash;Danforth <span class="mini" style="background:#B300B3"></span>4 Sheppard <span class="mini" style="background:#FF8000"></span>5 Eglinton <span class="mini" style="background:#808080"></span>6 Finch West</li>
+    <li class="sublegend corridor-only">GO Transit and UP Express in Metrolinx&rsquo;s line colours, drawn to their real ends &mdash; Kitchener, Niagara Falls, Barrie, Oshawa: <span class="mini" style="background:#98002E"></span>Lakeshore West <span class="mini" style="background:#FF0D00"></span>Lakeshore East <span class="mini" style="background:#F57F25"></span>Milton <span class="mini" style="background:#00853E"></span>Kitchener <span class="mini" style="background:#003767"></span>Barrie <span class="mini" style="background:#0099C7"></span>Richmond Hill <span class="mini" style="background:#794500"></span>Stouffville <span class="mini" style="background:#0075D2"></span>UP Express</li>
     <li><span class="sw stop"></span> Stop</li>
     <li><span class="sw terminus"></span> Terminus</li>
   </ul>
@@ -167,11 +168,11 @@
     <button id="export-area" title="Drag a rectangle on the map; that area is rendered as a large print-quality PNG">Export PNG — select area</button>
     <button id="export-atlas" title="The ENTIRE network as one poster-grade PNG at ~65 000 px on the long edge, streamed together in the browser (takes several minutes, keep the tab open)">Export PNG — whole map</button>
   </div>
-  <div id="footer">Data: TTC Merged GTFS (City of Toronto Open Data) &middot; OpenStreetMap &middot; <span id="stamp"></span></div>
+  <div id="footer">Data: TTC Merged GTFS (City of Toronto Open Data) &middot; York Region Transit &middot; GO Transit &amp; UP Express (Metrolinx) &middot; OpenStreetMap &middot; <span id="stamp"></span></div>
   <label class="debug"><input type="checkbox" id="toggle-shape"> show raw GTFS shapes (QA)</label>
 </aside>
 <script src="vendor/maplibre-gl.js"></script>
-<script src="app.js?v=20260911n"></script>
+<script src="app.js?v=20260917b"></script>
 <script src="pdf-export.js?v=20260911a"></script>
 <script>
 (() => {

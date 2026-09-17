@@ -29,8 +29,16 @@ const joinList = (a) => a.join(', ');
 
 export function nightPass(dir, NIGHT, opts = {}) {
   const sort = !!opts.sort;
-  const isNight = (n) => NIGHT.test(n);
-  const order = (list) => (sort ? [...list.filter((n) => !isNight(n)), ...list.filter(isNight)] : list);
+  // nightKeys (17.09.2026): a Set of line KEYS. York Region's 300s expresses
+  // print the same bare numbers as the TTC's Blue Night 300s, so the printed
+  // number alone cannot tell them apart — where a file carries keys (meta,
+  // badges, the arr of every row and stop) the key decides, and a label row's
+  // printed numbers are read through its parallel arr.
+  const NK = opts.nightKeys;
+  const isNightKey = (k) => (NK ? NK.has(k) : NIGHT.test(String(k)));
+  let isNight = (n) => NIGHT.test(n);
+  const orderBy = (list, test) => (sort ? [...list.filter((n) => !test(n)), ...list.filter(test)] : list);
+  const order = (list) => orderBy(list, isNight);
   const rd = (f) => JSON.parse(readFileSync(join(dir, f), 'utf8'));
   const wr = (f, o) => writeFileSync(join(dir, f), JSON.stringify(o), 'utf8');
   const stats = { rows: 0, busRows: 0, tramRows: 0, badges: 0, meta: 0, stops: 0, maxSlots: 0 };
@@ -67,10 +75,18 @@ export function nightPass(dir, NIGHT, opts = {}) {
       if (!p || p.mLines || p.nmLines) continue; // paratransit splits: untouched
       for (const k of Object.keys(p)) if (/^(b|t)?[lc]\d+$/.test(k)) delete p[k]; // a rerun recomputes
       const lines = split(p.lines);
+      if (NK) {
+        // the printed numbers of this row, night or not, by their keys
+        const printed = [...lines, ...split(p.busLines)];
+        const rowNight = new Set();
+        if (Array.isArray(p.arr) && p.arr.length === printed.length) p.arr.forEach((k, i) => { if (NK.has(k)) rowNight.add(printed[i]); });
+        else printed.forEach((n) => { if (NIGHT.test(n)) rowNight.add(n); });
+        isNight = (n) => rowNight.has(n);
+      }
       if (!lines.some(isNight) && !split(p.busLines).some(isNight)) continue;
       if (sort) {
         for (const k of ['lines', 'busLines', 'tLines', 'ntLines']) if (p[k]) p[k] = joinList(order(split(p[k])));
-        if (Array.isArray(p.arr)) p.arr = order(p.arr);
+        if (Array.isArray(p.arr)) p.arr = orderBy(p.arr, isNightKey);
       }
       const railColor = p.color || KMK;
       let groups, busGroups, tramGroups;
@@ -100,8 +116,8 @@ export function nightPass(dir, NIGHT, opts = {}) {
     for (const f of badges.features) {
       const p = f.properties;
       if (!p) continue;
-      if (p.line !== undefined && isNight(String(p.line))) { p.color = BLACK; p.colorDark = BLACK; stats.badges++; }
-      if (sort && Array.isArray(p.arr)) p.arr = order(p.arr);
+      if (p.line !== undefined && isNightKey(String(p.line))) { p.color = BLACK; p.colorDark = BLACK; stats.badges++; }
+      if (sort && Array.isArray(p.arr)) p.arr = orderBy(p.arr, isNightKey);
     }
     wr('badges.geojson', badges);
   }
@@ -112,8 +128,10 @@ export function nightPass(dir, NIGHT, opts = {}) {
     const meta = rd('meta.json');
     if (Array.isArray(meta.lines)) {
       const key = (l) => String(l.label !== undefined && l.label !== null ? l.label : l.line);
+      if (NK) isNight = (n) => NIGHT.test(n);
+      const metaNight = (l) => (NK ? NK.has(l.line) : isNight(key(l)));
       for (const l of meta.lines) {
-        if (!isNight(key(l))) continue;
+        if (!metaNight(l)) continue;
         l.color = BLACK; if (l.colorDark !== undefined) l.colorDark = BLACK;
         if (sort && l.rank === undefined) l.rank = 2;
         stats.meta++;
@@ -123,7 +141,7 @@ export function nightPass(dir, NIGHT, opts = {}) {
         meta.lines.forEach((l, i) => { if (!firstMode.has(l.mode)) firstMode.set(l.mode, i); });
         // colours together: mode groups in their first-seen order, the green
         // trolleybuses at the head of their group, the black night lines last of all
-        const grp = (l) => (isNight(key(l)) ? 1 : 0);
+        const grp = (l) => (metaNight(l) ? 1 : 0);
         const tro = (l) => (String(l.color).toLowerCase() === TROLLEY_GREEN ? 0 : 1);
         meta.lines = meta.lines.map((l, i) => ({ l, i })).sort((a, b) => (grp(a.l) - grp(b.l)) || (firstMode.get(a.l.mode) - firstMode.get(b.l.mode)) || (tro(a.l) - tro(b.l)) || (a.i - b.i)).map((x) => x.l);
       }
@@ -138,8 +156,16 @@ export function nightPass(dir, NIGHT, opts = {}) {
     for (const f of stops.features) {
       const p = f.properties;
       if (!p) continue;
+      if (NK && Array.isArray(p.arr) && p.lines && split(p.lines).length === p.arr.length) {
+        // keys and printed numbers side by side: sort the pairs by key
+        const pairs = orderBy(p.arr.map((k, i) => [k, split(p.lines)[i]]), (x) => NK.has(x[0]));
+        const o = pairs.map((x) => x[1]);
+        if (joinList(o) !== p.lines) { p.lines = joinList(o); stats.stops++; }
+        p.arr = pairs.map((x) => x[0]);
+        continue;
+      }
       if (p.lines) { const o = order(split(p.lines)); if (joinList(o) !== p.lines) { p.lines = joinList(o); stats.stops++; } }
-      if (Array.isArray(p.arr)) p.arr = order(p.arr);
+      if (Array.isArray(p.arr)) p.arr = orderBy(p.arr, isNightKey);
     }
     wr('stops.geojson', stops);
   }

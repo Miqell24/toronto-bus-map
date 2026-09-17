@@ -2,10 +2,13 @@
 # -*- coding: utf-8 -*-
 """Cuts the OSM extracts out of the Geofabrik australia-latest.osm.pbf — same
 JSON shape as Overpass ('elements': ways with tags, node ids and geometry), so
-build.mjs cannot tell the difference. Toronto's frame is 44 × 50 km (the
-city and its rim from Mississauga to Markham); Geofabrik has no Toronto
-extract, so the whole of Ontario is read once (1.1 GB, pyosmium with an
-in-memory node index) and every tile is written in the same pass.
+build.mjs cannot tell the difference. Toronto's ROAD grid is 94 × 58 km
+(17.09.2026: the city, York Region up to Georgina and Barrie, Brampton and
+Bolton on the west — 6 × 9 tiles), while the RAIL file reaches as far as the
+GO trains do: Kitchener, Niagara Falls, Barrie and Oshawa (160 × 145 km).
+Geofabrik has no Toronto extract, so the whole of Ontario is read once
+(1.1 GB, pyosmium with an in-memory node index) and every tile is written in
+the same pass.
 
 Way ids are OSM's own; node ids ride along because buildGraph() builds the
 topology from el.nodes and SILENTLY skips ways without them.
@@ -17,20 +20,23 @@ ROOT = os.path.join(os.path.dirname(__file__), '..')
 PBFS = [os.path.join(ROOT, 'data', 'ontario-latest.osm.pbf')]
 
 # must match pipeline/download.sh and build.mjs
-S, N, W, E = 43.55, 43.95, -79.70, -79.07
-RAIL_BOX = (43.55, -79.70, 43.95, -79.07)
+S, N, W, E = 43.55, 44.40, -79.80, -79.07
+COLS, ROWS = 6, 9
+RAIL_BOX = (43.00, -80.60, 44.45, -78.80)
+# the pre-filter below must admit anything inside EITHER box
+FS, FW, FN, FE = min(S, RAIL_BOX[0]), min(W, RAIL_BOX[1]), max(N, RAIL_BOX[2]), max(E, RAIL_BOX[3])
 
 HW = re.compile(r'^(motorway|trunk|primary|secondary|tertiary|unclassified|residential|living_street|service|busway|construction|motorway_link|trunk_link|primary_link|secondary_link|tertiary_link)$')
 RAIL = re.compile(r'^(subway|tram|light_rail|rail|construction)$')
 
 road_tiles = {}
-for i in range(1, 26):
+for i in range(1, COLS * ROWS + 1):
     f = os.path.join(ROOT, f'data/osm/tiles/t{i}.json')
     if os.path.exists(f):
         continue
-    row, col = (i - 1) // 5, (i - 1) % 5
-    road_tiles[i] = (S + (N - S) * row / 5, S + (N - S) * (row + 1) / 5,
-                     W + (E - W) * col / 5, W + (E - W) * (col + 1) / 5)
+    row, col = (i - 1) // COLS, (i - 1) % COLS
+    road_tiles[i] = (S + (N - S) * row / ROWS, S + (N - S) * (row + 1) / ROWS,
+                     W + (E - W) * col / COLS, W + (E - W) * (col + 1) / COLS)
 rail_file = os.path.join(ROOT, 'data/osm/toronto-rail.json')
 need_rail = not os.path.exists(rail_file)
 print('brakujące kafle dróg:', sorted(road_tiles), '| szyny:', need_rail, flush=True)
@@ -67,7 +73,7 @@ class H(osmium.SimpleHandler):
         if len(geom) < 2:
             return
         # the whole country goes by: drop anything outside the frame first
-        if la1 < S or la0 > N or lo1 < W or lo0 > E:
+        if la1 < FS or la0 > FN or lo1 < FW or lo0 > FE:
             return
         el = None
 

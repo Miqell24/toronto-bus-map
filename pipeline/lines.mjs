@@ -49,7 +49,9 @@ const keyParts = (s) => { const m = /^(\D*)(\d*)(.*)$/.exec(s); return [m[1], m[
 // the rows print night lines last, as the panel and the badges do
 const META_RANK = new Map((JSON.parse(readFileSync(join(OUT, 'meta.json'), 'utf8')).lines || []).map((l) => [l.line, l.rank ?? 1]));
 const rankOf = (k) => META_RANK.get(k) ?? 1;
-const numSort = (a, b) => { const A = keyParts(a), B = keyParts(b); return rankOf(a) - rankOf(b) || A[0].localeCompare(B[0]) || (A[1] - B[1]) || A[2].localeCompare(B[2]); };
+// operator order of build.mjs (17.09.2026): TTC, York Region (Viva first), GO
+const opRank = (k) => (/^GO\d/.test(k) ? 2 : /^(Y\d|Viva )/.test(k) ? 1 : 0);
+const numSort = (a, b) => { const A = keyParts(a), B = keyParts(b); return rankOf(a) - rankOf(b) || opRank(a) - opRank(b) || A[0].localeCompare(B[0]) || (A[1] - B[1]) || A[2].localeCompare(B[2]); };
 
 // ---------- colour: CIE-Lab, so "different enough" is a measurable distance ----------
 function lab2rgb(L, a, b) {
